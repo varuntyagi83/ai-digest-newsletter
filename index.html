@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Weekly Digest — Sunday Natural</title>
+  <meta name="description" content="Stay ahead of the AI curve. Curated weekly by Sunday Natural. Get the latest in AI news, business ops, e-commerce, and dev tools.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <p class="hero-label">Sunday Natural</p>
+      <h1 class="hero-title">AI Weekly Digest</h1>
+      <p class="hero-subtitle">Stay ahead of the AI curve. Curated weekly by Sunday Natural.</p>
+
+      <form
+        class="subscribe-form"
+        method="POST"
+        action="https://n8n.varuntyagi.net/webhook/nl-subscribe"
+        id="subscribe-form"
+      >
+        <input type="hidden" name="redirect_url" id="redirect-url" value="">
+        <div class="form-group">
+          <input
+            type="email"
+            name="email"
+            id="email-input"
+            placeholder="Enter your email address"
+            required
+            autocomplete="email"
+          >
+          <button type="submit" class="btn-subscribe">Subscribe</button>
+        </div>
+        <p class="form-note">Free. Weekly. No spam. Unsubscribe anytime.</p>
+      </form>
+    </div>
+  </header>
+
+  <!-- What You'll Get Section -->
+  <section class="features">
+    <div class="features-inner">
+      <h2 class="features-title">What You'll Get</h2>
+      <p class="features-subtitle">Every week, we curate the most important AI developments across four key areas.</p>
+
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">&#127760;</div>
+          <h3 class="card-title">General AI News</h3>
+          <p class="card-text">Major breakthroughs, policy updates, and industry shifts shaping the AI landscape worldwide.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">&#127970;</div>
+          <h3 class="card-title">AI for Business &amp; Ops</h3>
+          <p class="card-text">Practical AI applications for operations, automation, supply chain, and enterprise workflows.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">&#128722;</div>
+          <h3 class="card-title">AI in E-commerce</h3>
+          <p class="card-text">Personalization, recommendation engines, pricing intelligence, and customer experience innovations.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">&lt;/&gt;</div>
+          <h3 class="card-title">AI Coding &amp; Dev Tools</h3>
+          <p class="card-text">Code assistants, new frameworks, developer productivity tools, and engineering best practices.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Powered by n8n &bull; Sunday Natural GmbH, Berlin</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

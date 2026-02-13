@@ -298,6 +298,21 @@ body {
   font-size: 0.85rem;
 }
 
+.admin-link {
+  margin-top: 8px;
+  font-size: 0.75rem;
+}
+
+.admin-link a {
+  color: #334155;
+  text-decoration: none;
+}
+
+.admin-link a:hover {
+  color: #64748b;
+  text-decoration: underline;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .hero {

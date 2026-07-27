@@ -13,71 +13,144 @@
   <!-- Toast Container -->
   <div id="toast-container"></div>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-content">
-      <p class="hero-label">Sunday Natural</p>
-      <h1 class="hero-title">AI Weekly Digest</h1>
-      <p class="hero-subtitle">Stay ahead of the AI curve. Curated weekly by Sunday Natural.</p>
+  <!-- Tab Navigation -->
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab is-active" role="tab" data-tab="public" id="tab-public" aria-selected="true" aria-controls="panel-public">Newsletter</button>
+    <button class="tab" role="tab" data-tab="admin" id="tab-admin" aria-selected="false" aria-controls="panel-admin">Admin</button>
+  </nav>
 
-      <form
-        class="subscribe-form"
-        method="POST"
-        action="https://n8n.varuntyagi.net/webhook/nl-subscribe"
-        id="subscribe-form"
-      >
-        <input type="hidden" name="redirect_url" id="redirect-url" value="">
-        <div class="form-group">
-          <input
-            type="email"
-            name="email"
-            id="email-input"
-            placeholder="Enter your email address"
-            required
-            autocomplete="email"
-          >
-          <button type="submit" class="btn-subscribe">Subscribe</button>
+  <!-- ============ PUBLIC PANEL ============ -->
+  <div class="panel is-active" id="panel-public" role="tabpanel" aria-labelledby="tab-public">
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <p class="hero-label">Sunday Natural</p>
+        <h1 class="hero-title">AI Weekly Digest</h1>
+        <p class="hero-subtitle">Stay ahead of the AI curve. Curated weekly by Sunday Natural.</p>
+
+        <form
+          class="subscribe-form"
+          method="POST"
+          action="https://n8n.varuntyagi.net/webhook/nl-subscribe"
+          id="subscribe-form"
+        >
+          <input type="hidden" name="redirect_url" id="redirect-url" value="">
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              id="email-input"
+              placeholder="Enter your email address"
+              required
+              autocomplete="email"
+            >
+            <button type="submit" class="btn-subscribe">Subscribe</button>
+          </div>
+          <p class="form-note">Free. Weekly. No spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+    </header>
+
+    <!-- What You'll Get Section -->
+    <section class="features">
+      <div class="features-inner">
+        <h2 class="features-title">What You'll Get</h2>
+        <p class="features-subtitle">Every week, we curate the most important AI developments across four key areas.</p>
+
+        <div class="card-grid">
+
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">&#127760;</div>
+            <h3 class="card-title">General AI News</h3>
+            <p class="card-text">Major breakthroughs, policy updates, and industry shifts shaping the AI landscape worldwide.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">&#127970;</div>
+            <h3 class="card-title">AI for Business &amp; Ops</h3>
+            <p class="card-text">Practical AI applications for operations, automation, supply chain, and enterprise workflows.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">&#128722;</div>
+            <h3 class="card-title">AI in E-commerce</h3>
+            <p class="card-text">Personalization, recommendation engines, pricing intelligence, and customer experience innovations.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">&lt;/&gt;</div>
+            <h3 class="card-title">AI Coding &amp; Dev Tools</h3>
+            <p class="card-text">Code assistants, new frameworks, developer productivity tools, and engineering best practices.</p>
+          </div>
+
         </div>
-        <p class="form-note">Free. Weekly. No spam. Unsubscribe anytime.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ ADMIN PANEL ============ -->
+  <div class="panel" id="panel-admin" role="tabpanel" aria-labelledby="tab-admin" hidden>
+
+    <!-- Login view -->
+    <section class="admin-login" id="admin-login">
+      <form class="login-card" id="login-form">
+        <div class="login-icon" aria-hidden="true">&#128274;</div>
+        <h2 class="login-title">Admin Access</h2>
+        <p class="login-subtitle">Enter your admin key to view and manage the subscriber list.</p>
+        <input
+          type="password"
+          id="admin-key"
+          class="login-input"
+          placeholder="Admin key"
+          autocomplete="current-password"
+          required
+        >
+        <button type="submit" class="btn-primary" id="login-btn">Unlock</button>
+        <p class="login-error" id="login-error" role="alert" hidden></p>
+        <p class="login-note">The key is verified by the n8n backend. It is never stored in this page.</p>
       </form>
-    </div>
-  </header>
+    </section>
 
-  <!-- What You'll Get Section -->
-  <section class="features">
-    <div class="features-inner">
-      <h2 class="features-title">What You'll Get</h2>
-      <p class="features-subtitle">Every week, we curate the most important AI developments across four key areas.</p>
+    <!-- Dashboard view -->
+    <section class="admin-dash" id="admin-dash" hidden>
+      <div class="dash-inner">
 
-      <div class="card-grid">
-
-        <div class="card">
-          <div class="card-icon" aria-hidden="true">&#127760;</div>
-          <h3 class="card-title">General AI News</h3>
-          <p class="card-text">Major breakthroughs, policy updates, and industry shifts shaping the AI landscape worldwide.</p>
+        <div class="dash-head">
+          <div>
+            <h2 class="dash-title">Subscribers</h2>
+            <p class="dash-count" id="dash-count">Loading…</p>
+          </div>
+          <div class="dash-actions">
+            <button type="button" class="btn-ghost" id="refresh-btn">Refresh</button>
+            <button type="button" class="btn-ghost" id="lock-btn">Lock</button>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-icon" aria-hidden="true">&#127970;</div>
-          <h3 class="card-title">AI for Business &amp; Ops</h3>
-          <p class="card-text">Practical AI applications for operations, automation, supply chain, and enterprise workflows.</p>
+        <div class="dash-toolbar">
+          <input type="search" id="filter-input" class="filter-input" placeholder="Filter by email address">
+          <button type="button" class="btn-danger" id="bulk-btn" disabled>Unsubscribe selected</button>
         </div>
 
-        <div class="card">
-          <div class="card-icon" aria-hidden="true">&#128722;</div>
-          <h3 class="card-title">AI in E-commerce</h3>
-          <p class="card-text">Personalization, recommendation engines, pricing intelligence, and customer experience innovations.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon" aria-hidden="true">&lt;/&gt;</div>
-          <h3 class="card-title">AI Coding &amp; Dev Tools</h3>
-          <p class="card-text">Code assistants, new frameworks, developer productivity tools, and engineering best practices.</p>
+        <div class="table-wrap">
+          <table class="sub-table">
+            <thead>
+              <tr>
+                <th class="col-check"><input type="checkbox" id="check-all" aria-label="Select all"></th>
+                <th class="col-num">#</th>
+                <th>Email</th>
+                <th class="col-date">Subscribed</th>
+                <th class="col-action"></th>
+              </tr>
+            </thead>
+            <tbody id="sub-tbody"></tbody>
+          </table>
+          <p class="dash-empty" id="dash-empty" hidden>No subscribers match this filter.</p>
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">

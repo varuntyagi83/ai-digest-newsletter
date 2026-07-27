@@ -244,8 +244,15 @@
    */
   function unsubscribeOne(email) {
     var encoded = btoa(email);
+    var url = UNSUBSCRIBE_URL + "?email=" + encodeURIComponent(encoded);
 
-    return fetch(UNSUBSCRIBE_URL + "?email=" + encodeURIComponent(encoded), { cache: "no-store" })
+    // Subscribers unsubscribe with their own per person token. An admin has no
+    // token, so the key authorises the removal instead.
+    if (adminKey) {
+      url += "&key=" + encodeURIComponent(adminKey);
+    }
+
+    return fetch(url, { cache: "no-store" })
       .then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.text();

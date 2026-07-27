@@ -460,6 +460,12 @@
       lockBtn.addEventListener("click", function () {
         adminKey = null;
         subscribers = [];
+
+        // Wipe the rendered addresses too, so no subscriber data is left
+        // sitting in the DOM once the list is locked again.
+        if (filterEl) filterEl.value = "";
+        renderTable();
+
         showLogin("");
       });
     }

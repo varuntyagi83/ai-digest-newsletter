@@ -8,6 +8,7 @@
 
   var SUBSCRIBERS_URL = "https://n8n.varuntyagi.net/webhook/nl-subscribers";
   var UNSUBSCRIBE_URL = "https://n8n.varuntyagi.net/webhook/nl-unsubscribe";
+  var BACKUP_URL = "https://n8n.varuntyagi.net/webhook/nl-backup";
 
   var subscribers = [];
 
@@ -439,6 +440,7 @@
     var loginForm = document.getElementById("login-form");
     var filterEl = document.getElementById("filter-input");
     var refreshBtn = document.getElementById("refresh-btn");
+    var backupBtn = document.getElementById("backup-btn");
     var lockBtn = document.getElementById("lock-btn");
     var bulkBtn = document.getElementById("bulk-btn");
     var checkAll = document.getElementById("check-all");
@@ -460,6 +462,37 @@
     if (refreshBtn) {
       refreshBtn.addEventListener("click", function () {
         if (adminKey) loadSubscribers(adminKey);
+      });
+    }
+
+    if (backupBtn) {
+      backupBtn.addEventListener("click", function () {
+        if (!adminKey) return;
+
+        backupBtn.disabled = true;
+        backupBtn.textContent = "Backing up…";
+
+        fetch(BACKUP_URL + "?key=" + encodeURIComponent(adminKey), { cache: "no-store" })
+          .then(function (res) {
+            // A rejected key comes back as 403 with a JSON body.
+            return res.json().catch(function () { return { ok: false }; });
+          })
+          .then(function (result) {
+            if (result && result.ok) {
+              showToast("Backed up " + result.count +
+                (result.count === 1 ? " subscriber" : " subscribers") +
+                " to Drive as " + result.file, "success");
+            } else {
+              showToast("Backup failed. The admin key was refused.", "error");
+            }
+          })
+          .catch(function () {
+            showToast("Backup failed. Could not reach the backup service.", "error");
+          })
+          .then(function () {
+            backupBtn.disabled = false;
+            backupBtn.textContent = "Back up to Drive";
+          });
       });
     }
 
